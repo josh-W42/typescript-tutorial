@@ -27,12 +27,24 @@ axios
     const title = todo.title;
     const completed = todo.completed;
 
-    console.log(`
-      The Todo with ID: ${ID}
-      Has a title of ${title}
-      Is it finnished? ${completed}
-    `);
+    logTodo(ID, title, completed);
   })
   .catch((err) => {
     console.error(err);
   });
+
+/*
+  Bellow is another example of why TS is useful
+
+  By defining the types of the parameters, the complier can
+  catch common errors we as developers make before running the
+  code.
+*/
+
+const logTodo = (id: number, title: string, completed: boolean) => {
+  console.log(`
+    The Todo with ID: ${id}
+    Has a title of ${title}
+    Is it finnished? ${completed}
+  `);
+};
