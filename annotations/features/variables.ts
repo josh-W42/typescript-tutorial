@@ -103,3 +103,66 @@ for (let i = 0; i < numbers2.length; i++) {
     numberAboveZero = numbers2[i];
   }
 }
+
+// function annotations
+// this is a cleaner way of writing function annotations
+// than the example we used before
+const add = (a: number, b: number): number => {
+  return a + b;
+};
+
+/*
+  When writing out functions, always annotate types for
+  parameters, do not use inference for these.
+  
+  Also, while inference can work for the output.. Do Not Use It!
+  instead also annotate the output. So that typescript knows we
+  intend on returning something from the function or not.
+*/
+
+// anonymous functions
+// the function definitions should be similar
+function divide(a: number, b: number): number {
+  return a / b;
+}
+const multiply = function (a: number, b: number): number {
+  return a * b;
+};
+
+// functions that don't return anything
+const logger = (message: string): void => {
+  console.log(message);
+};
+
+// This is a special case in which the function never returns anything
+// the program is exited before the function is complete.
+const throwError = (message: string): never => {
+  throw new Error(message);
+};
+
+// however in a similar case, we should still specify the output
+const throwNewError = (message: string): string => {
+  if (!message) {
+    throw new Error('Not found');
+  }
+
+  return message;
+};
+
+// destructuring
+const logWeather = (forecast: { date: Date; weather: string }): void => {
+  console.log(forecast.date);
+  console.log(forecast.weather);
+};
+
+// in ES2015 syntax with destructuring
+const logWeather2 = ({
+  date,
+  weather,
+}: {
+  date: Date;
+  weather: string;
+}): void => {
+  console.log(date);
+  console.log(weather);
+};
