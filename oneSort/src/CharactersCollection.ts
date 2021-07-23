@@ -1,4 +1,6 @@
-export class CharactersCollection {
+import { Sorter } from "./Sorter";
+
+export class CharactersCollection extends Sorter {
   // changed the solution a bit so that we could
   // keep swap and compare constant
   // the only issue is when this class gets the
@@ -6,6 +8,7 @@ export class CharactersCollection {
   private charArray: string[];
 
   constructor(private _data: string) {
+    super();
     this.charArray = _data.split("");
   }
 

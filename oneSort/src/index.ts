@@ -27,13 +27,22 @@
 import { Sorter } from "./Sorter";
 import { NumbersCollection } from "./NumbersCollection";
 import { CharactersCollection } from "./CharactersCollection";
+import { LinkedList } from "./LinkedList";
 
-// const numCollection = new NumbersCollection([10, 3, -5, 0]);
-// const sorter = new Sorter(numCollection);
-// sorter.sort();
-// console.log(numCollection.data);
+const numCollection = new NumbersCollection([10, 3, -5, 0]);
+numCollection.sort();
+console.log(numCollection.data);
 
 const charCollection = new CharactersCollection("Xaayb");
-const sorter = new Sorter(charCollection);
-sorter.sort();
+charCollection.sort();
 console.log(charCollection.data);
+
+const linkedList = new LinkedList();
+linkedList.add(500);
+linkedList.add(-10);
+linkedList.add(-3);
+linkedList.add(4);
+
+linkedList.sort();
+
+linkedList.print();
