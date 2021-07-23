@@ -136949,7 +136949,31 @@ var Company = function () {
 }();
 
 exports.Company = Company;
-},{"faker":"node_modules/faker/index.js"}],"src/index.ts":[function(require,module,exports) {
+},{"faker":"node_modules/faker/index.js"}],"src/CustomMap.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CustomMap = void 0;
+
+var CustomMap = function () {
+  function CustomMap() {
+    this.googleMap = "fake map"; // bellow is what I actually need
+    // this.googleMap = new google.maps.Map(document.getElementById("map"), {
+    //   zoom: 1,
+    //   center: {
+    //     lat: 0,
+    //     lng: 0,
+    //   },
+    // });
+  }
+
+  return CustomMap;
+}();
+
+exports.CustomMap = CustomMap;
+},{}],"src/index.ts":[function(require,module,exports) {
 "use strict";
 /*
   if you need to remember to use parcel
@@ -136966,11 +136990,28 @@ var User_1 = require("./User");
 
 var Company_1 = require("./Company");
 
+var CustomMap_1 = require("./CustomMap");
+
 console.log(new User_1.User());
 console.log(new Company_1.Company()); // google.map;
 // the google global variable is not working probably
 // ~so sorry~
-},{"./User":"src/User.ts","./Company":"src/Company.ts"}],"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+// const map = new google.maps.Map(document.getElementById("map"), {
+//   zoom: 1,
+//   center: {
+//     lat: 0,
+//     lng: 0,
+//   },
+// });
+
+/*
+  We're going to create a custom map class to encapsulate the google maps
+  object so that we can keep it safe and so that in the future..
+  there won't be many issues.
+*/
+
+new CustomMap_1.CustomMap();
+},{"./User":"src/User.ts","./Company":"src/Company.ts","./CustomMap":"src/CustomMap.ts"}],"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -136998,7 +137039,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57273" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61556" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
