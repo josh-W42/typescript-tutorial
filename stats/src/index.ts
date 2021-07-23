@@ -1,7 +1,7 @@
 // had to install @types/node for standard lib types
 // ANYTIME YOU ARE USING NODE STANDARD LIBRARY STUFF IN TS
 // REMEMBER TO DOWNLOAD @types/node OR YOU WILL GET AN ERROR
-import fs from "fs";
+import { CsvFileReader } from "./CsvFileReader";
 
 /*
   This is the start of the 'bad code'
@@ -12,14 +12,10 @@ import fs from "fs";
 // we have to parse this
 // split by \n
 // then by comma
-const matches = fs
-  .readFileSync("football.csv", {
-    encoding: "utf-8",
-  })
-  .split("\n")
-  .map((row: string): string[] => row.split(","));
+const reader = new CsvFileReader("football.csv");
+reader.read();
 
-console.log(matches);
+console.log(reader.data);
 
 // improvement 1: no "magic variables"
 const homeWin = "H";
@@ -49,7 +45,7 @@ enum MatchResult {
 // find the number of times manchester united won
 let manUnitedWins = 0;
 
-for (let match of matches) {
+for (let match of reader.data) {
   if (match[2] === "Man United" && match[5] === homeWin) {
     manUnitedWins++;
   } else if (match[2] === "Man United" && match[5] === awayWin) {
