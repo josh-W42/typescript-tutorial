@@ -1,10 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// had to install @types/node for standard lib types
-// ANYTIME YOU ARE USING NODE STANDARD LIBRARY STUFF IN TS
-// REMEMBER TO DOWNLOAD @types/node OR YOU WILL GET AN ERROR
-var CsvFileReader_1 = require("./CsvFileReader");
 var MatchReader_1 = require("./MatchReader");
+var Summary_1 = require("./Summary");
 /*
   This project is large and can be confusing to look through but
   what we're trying to accomplish here is 2 different paths to make
@@ -19,30 +16,8 @@ var MatchReader_1 = require("./MatchReader");
   The point that we attempted to make was that sometimes composition can
   give rise to more reusable code
 */
-// for the interface path
-// create an object that satisfies the 'dataReader' interface
-var csvFileReader = new CsvFileReader_1.CsvFileReader("football.csv");
-// create an instance of MatchReader and pass in something satisfying
-// the 'data reader' interface'
-var matchReader = new MatchReader_1.MatchReader(csvFileReader);
+var matchReader = MatchReader_1.MatchReader.fromCsv("football.csv");
 matchReader.load();
-console.log(matchReader.matches[0]);
-// improvement 1: no "magic variables"
-// const homeWin = "H";
-// const awayWin = "A";
-// const draw = "D"; // bc this isn't used this might get deleted
-// option 1: use an object?
-// const MatchResult = {
-//   HomeWin: "H",
-//   AwayWin: "A",
-//   Draw: "D",
-// };
-// option 2: use an enum - enumeration - Better
-// imported from file
-// why are enums better than objects?
-// in this case enum is better because it's sole purpose
-// is to communicate that this is just a way of representing data.
-// ALSO, in this case the enum values are known before analysis
-// if this information was unknown we should not use an enum
 // find the number of times manchester united won
-console.log("lol");
+var summary = Summary_1.Summary.winsAnalysisWithHtmlReport("Man United");
+summary.buildAndPrintReport(matchReader.matches);
