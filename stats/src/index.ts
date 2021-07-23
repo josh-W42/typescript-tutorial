@@ -1,26 +1,26 @@
 // had to install @types/node for standard lib types
 // ANYTIME YOU ARE USING NODE STANDARD LIBRARY STUFF IN TS
 // REMEMBER TO DOWNLOAD @types/node OR YOU WILL GET AN ERROR
+import { CsvFileReader } from "./CsvFileReader";
 import { MatchReader } from "./MatchReader";
+import { MatchResult } from "./MatchResult";
 
-/*
-  This is the start of the 'bad code'
-  or just not reusable code approach to
-  this analysis.
-*/
+// for the interface path
 
-// we have to parse this
-// split by \n
-// then by comma
-const reader = new MatchReader("football.csv");
-reader.read();
+// create an object that satisfies the 'dataReader' interface
+const csvFileReader = new CsvFileReader("football.csv");
 
-console.log(reader.data[0]);
+// create an instance of MatchReader and pass in something satisfying
+// the 'data reader' interface'
+const matchReader = new MatchReader(csvFileReader);
+matchReader.load();
+
+console.log(matchReader.matches[0]);
 
 // improvement 1: no "magic variables"
-const homeWin = "H";
-const awayWin = "A";
-const draw = "D"; // bc this isn't used this might get deleted
+// const homeWin = "H";
+// const awayWin = "A";
+// const draw = "D"; // bc this isn't used this might get deleted
 
 // option 1: use an object?
 // const MatchResult = {
@@ -41,10 +41,10 @@ const draw = "D"; // bc this isn't used this might get deleted
 // find the number of times manchester united won
 let manUnitedWins = 0;
 
-for (let match of reader.data) {
-  if (match[2] === "Man United" && match[5] === homeWin) {
+for (let match of matchReader.matches) {
+  if (match[2] === "Man United" && match[5] === MatchResult.HomeWin) {
     manUnitedWins++;
-  } else if (match[2] === "Man United" && match[5] === awayWin) {
+  } else if (match[2] === "Man United" && match[5] === MatchResult.AwayWin) {
     manUnitedWins++;
   }
 }
