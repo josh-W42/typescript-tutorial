@@ -2,6 +2,7 @@
 // ANYTIME YOU ARE USING NODE STANDARD LIBRARY STUFF IN TS
 // REMEMBER TO DOWNLOAD @types/node OR YOU WILL GET AN ERROR
 import { CsvFileReader } from "./CsvFileReader";
+import { MatchResult } from "./MatchResult";
 
 /*
   This is the start of the 'bad code'
@@ -15,7 +16,7 @@ import { CsvFileReader } from "./CsvFileReader";
 const reader = new CsvFileReader("football.csv");
 reader.read();
 
-console.log(reader.data);
+console.log(reader.data[0][0]);
 
 // improvement 1: no "magic variables"
 const homeWin = "H";
@@ -30,11 +31,7 @@ const draw = "D"; // bc this isn't used this might get deleted
 // };
 
 // option 2: use an enum - enumeration - Better
-enum MatchResult {
-  HomeWin = "H",
-  AwayWin = "A",
-  Draw = "D",
-}
+// imported from file
 
 // why are enums better than objects?
 // in this case enum is better because it's sole purpose
