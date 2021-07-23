@@ -5,7 +5,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // REMEMBER TO DOWNLOAD @types/node OR YOU WILL GET AN ERROR
 var CsvFileReader_1 = require("./CsvFileReader");
 var MatchReader_1 = require("./MatchReader");
-var MatchResult_1 = require("./MatchResult");
 /*
   This project is large and can be confusing to look through but
   what we're trying to accomplish here is 2 different paths to make
@@ -46,14 +45,4 @@ console.log(matchReader.matches[0]);
 // ALSO, in this case the enum values are known before analysis
 // if this information was unknown we should not use an enum
 // find the number of times manchester united won
-var manUnitedWins = 0;
-for (var _i = 0, _a = matchReader.matches; _i < _a.length; _i++) {
-    var match = _a[_i];
-    if (match[2] === "Man United" && match[5] === MatchResult_1.MatchResult.HomeWin) {
-        manUnitedWins++;
-    }
-    else if (match[2] === "Man United" && match[5] === MatchResult_1.MatchResult.AwayWin) {
-        manUnitedWins++;
-    }
-}
-console.log("Man United won: " + manUnitedWins + " games");
+console.log("lol");

@@ -1,10 +1,7 @@
 // this is the interface solution to the reuseable code problem
 import { MatchResult } from "./MatchResult";
 import { dateStringToDate } from "./utils";
-
-// we're defining a tuple so that we can describe what
-// exactly each row will look like
-type MatchData = [Date, string, string, number, number, MatchResult, string];
+import { MatchData } from "./MatchData";
 
 interface DataReader {
   read(): void;
