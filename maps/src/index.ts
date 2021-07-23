@@ -6,5 +6,11 @@
 */
 
 import { User } from "./User";
+import { Company } from "./Company";
 
 console.log(new User());
+console.log(new Company());
+
+// google.map;
+// the google global variable is not working probably
+// ~so sorry~
