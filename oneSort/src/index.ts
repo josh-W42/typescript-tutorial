@@ -26,8 +26,14 @@
 */
 import { Sorter } from "./Sorter";
 import { NumbersCollection } from "./NumbersCollection";
+import { CharactersCollection } from "./CharactersCollection";
 
-const numCollection = new NumbersCollection([10, 3, -5, 0]);
-const sorter = new Sorter(numCollection);
+// const numCollection = new NumbersCollection([10, 3, -5, 0]);
+// const sorter = new Sorter(numCollection);
+// sorter.sort();
+// console.log(numCollection.data);
+
+const charCollection = new CharactersCollection("Xaayb");
+const sorter = new Sorter(charCollection);
 sorter.sort();
-console.log(numCollection.data);
+console.log(charCollection.data);

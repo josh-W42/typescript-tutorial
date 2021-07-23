@@ -1,7 +1,15 @@
 import { NumbersCollection } from "./NumbersCollection";
 
+// we use an interface to define and
+// enforce what objects this sorter can sort
+interface Sortable {
+  length: number;
+  compare(leftIndex: number, rightIndex: number): boolean;
+  swap(leftIndex: number, rightIndex: number): void;
+}
+
 export class Sorter {
-  constructor(public collection: NumbersCollection) {}
+  constructor(public collection: Sortable) {}
 
   sort(): void {
     // We're just using bubble sort, nothing fancy
