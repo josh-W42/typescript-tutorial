@@ -5,7 +5,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CsvFileReader = void 0;
 var fs_1 = __importDefault(require("fs"));
-var utils_1 = require("./utils");
+// we generalized the file reader functionality to
+// a class that reads and parses a csv file, making this
+// code more reuseable
+/*
+   We're getting ready to use something call "generics"
+
+  - They are like function arguments but they are used for types
+      in a class/function definition
+
+  - We can define a type of a property/parameter/return value
+      at a future point (like abstract classes let us)
+  
+  - Used heavily when writing reusable code.
+
+  example:
+  class HoldAnything<Type> {
+    data: Type;
+  }
+
+  const holdNumber = new HoldAnything<number>();
+  holdNumber.data = 123;
+  (holdNumber<number> and holdNumber.data is of type number)
+
+  similarly
+  const holdString = new HoldAnything<string>();
+  (holdString<string> and holdString.data is of type string)
+
+*/
+// csvFileReader is now a generic abstract class
 var CsvFileReader = /** @class */ (function () {
     function CsvFileReader(filename) {
         this.filename = filename;
@@ -18,17 +46,7 @@ var CsvFileReader = /** @class */ (function () {
         })
             .split("\n")
             .map(function (row) { return row.split(","); })
-            .map(function (row) {
-            return [
-                utils_1.dateStringToDate(row[0]),
-                row[1],
-                row[2],
-                parseInt(row[3]),
-                parseInt(row[4]),
-                row[5],
-                row[6],
-            ];
-        });
+            .map(this.mapRow);
     };
     return CsvFileReader;
 }());

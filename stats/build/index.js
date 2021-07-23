@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // had to install @types/node for standard lib types
 // ANYTIME YOU ARE USING NODE STANDARD LIBRARY STUFF IN TS
 // REMEMBER TO DOWNLOAD @types/node OR YOU WILL GET AN ERROR
-var CsvFileReader_1 = require("./CsvFileReader");
+var MatchReader_1 = require("./MatchReader");
 /*
   This is the start of the 'bad code'
   or just not reusable code approach to
@@ -12,9 +12,9 @@ var CsvFileReader_1 = require("./CsvFileReader");
 // we have to parse this
 // split by \n
 // then by comma
-var reader = new CsvFileReader_1.CsvFileReader("football.csv");
+var reader = new MatchReader_1.MatchReader("football.csv");
 reader.read();
-console.log(reader.data[0][0]);
+console.log(reader.data[0]);
 // improvement 1: no "magic variables"
 var homeWin = "H";
 var awayWin = "A";

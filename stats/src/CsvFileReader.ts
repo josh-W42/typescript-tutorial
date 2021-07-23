@@ -1,19 +1,42 @@
 import fs from "fs";
-import { dateStringToDate } from "./utils";
 import { MatchResult } from "./MatchResult";
 
 // we generalized the file reader functionality to
 // a class that reads and parses a csv file, making this
 // code more reuseable
 
-// we're defining a tuple so that we can describe what
-// exactly each row will look like
-type MatchData = [Date, string, string, number, number, MatchResult, string];
+/*
+   We're getting ready to use something call "generics"
 
-export class CsvFileReader {
-  data: MatchData[] = [];
+  - They are like function arguments but they are used for types
+      in a class/function definition
+
+  - We can define a type of a property/parameter/return value
+      at a future point (like abstract classes let us)
+  
+  - Used heavily when writing reusable code.
+
+  example:
+  class HoldAnything<Type> {
+    data: Type;
+  }
+
+  const holdNumber = new HoldAnything<number>();
+  holdNumber.data = 123;
+  (holdNumber<number> and holdNumber.data is of type number)
+
+  similarly
+  const holdString = new HoldAnything<string>();
+  (holdString<string> and holdString.data is of type string)
+
+*/
+
+// csvFileReader is now a generic abstract class
+export abstract class CsvFileReader<T> {
+  data: T[] = [];
 
   constructor(public filename: string) {}
+  abstract mapRow(row: string[]): T;
 
   read(): void {
     this.data = fs
@@ -22,16 +45,6 @@ export class CsvFileReader {
       })
       .split("\n")
       .map((row: string): string[] => row.split(","))
-      .map((row: string[]): MatchData => {
-        return [
-          dateStringToDate(row[0]),
-          row[1],
-          row[2],
-          parseInt(row[3]),
-          parseInt(row[4]),
-          row[5] as MatchResult, // this is a type assertion
-          row[6],
-        ];
-      });
+      .map(this.mapRow);
   }
 }

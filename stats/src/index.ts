@@ -1,8 +1,7 @@
 // had to install @types/node for standard lib types
 // ANYTIME YOU ARE USING NODE STANDARD LIBRARY STUFF IN TS
 // REMEMBER TO DOWNLOAD @types/node OR YOU WILL GET AN ERROR
-import { CsvFileReader } from "./CsvFileReader";
-import { MatchResult } from "./MatchResult";
+import { MatchReader } from "./MatchReader";
 
 /*
   This is the start of the 'bad code'
@@ -13,10 +12,10 @@ import { MatchResult } from "./MatchResult";
 // we have to parse this
 // split by \n
 // then by comma
-const reader = new CsvFileReader("football.csv");
+const reader = new MatchReader("football.csv");
 reader.read();
 
-console.log(reader.data[0][0]);
+console.log(reader.data[0]);
 
 // improvement 1: no "magic variables"
 const homeWin = "H";
