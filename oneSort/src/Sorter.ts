@@ -1,5 +1,16 @@
 import { NumbersCollection } from "./NumbersCollection";
 
+/*
+  Interfaces vs abstract classes:
+
+  while interfaces and abstract classes solve similar
+  problems, interfaces loosely couple classes together
+  while abstract classes strongly couple classes together.
+
+  Whether or not you need that coupling depends on whether
+  you use interfaces vs abstract classes.
+*/
+
 // we use an interface to define and
 // enforce what objects this sorter can sort
 interface Sortable {
