@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Todo, fetchTodos } from "./actions";
+import { Todo, fetchTodos, deleteTodo } from "./actions";
 import { StoreState } from "./reducers";
+
+/*
+  Typical React-Redux Flow
+
+    wire up an action,
+    wiring up an action creator,
+    modifying out reducer,
+    attaching the action creator back to app component
+*/
 
 // common convention for props is to use an
 // interface to describe props and use "?" for
 // props that may or may not be present
 interface AppProps {
-  color?: string;
-  fetchTodos(): any;
+  fetchTodos: Function;
+  deleteTodo: Function;
   todos: Todo[];
 }
 
@@ -28,9 +37,17 @@ function _App(props: AppProps): JSX.Element {
     props.fetchTodos();
   };
 
+  const onTodoClick = (id: number): void => {
+    props.deleteTodo(id);
+  };
+
   const renderList = (): JSX.Element[] => {
     return props.todos.map((todo: Todo) => {
-      return <div key={todo.id}>{todo.title}</div>;
+      return (
+        <div key={todo.id} onClick={() => onTodoClick(todo.id)}>
+          {todo.title}
+        </div>
+      );
     });
   };
 
@@ -50,6 +67,6 @@ const mapStateToProps = ({ todos }: StoreState): { todos: Todo[] } => {
   return { todos };
 };
 
-const App = connect(mapStateToProps, { fetchTodos })(_App);
+const App = connect(mapStateToProps, { fetchTodos, deleteTodo })(_App);
 
 export default App;
