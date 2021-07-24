@@ -17,13 +17,26 @@ import { StoreState } from "./reducers";
 // props that may or may not be present
 interface AppProps {
   fetchTodos: Function;
-  deleteTodo: Function;
+  deleteTodo: typeof deleteTodo;
   todos: Todo[];
+}
+
+interface AppState {
+  fetching: boolean;
 }
 
 // as a functional component
 function _App(props: AppProps): JSX.Element {
   // const [counter, setCounter] = useState(0);
+  const [fetching, setFetching] = useState(false);
+
+  useEffect(() => {
+    if (props.todos.length > 0 && fetching) {
+      setTimeout(() => {
+        setFetching(false);
+      }, 500);
+    }
+  }, [fetching, props.todos]);
 
   // useEffect(() => {
   //    props.fetchTodos();
@@ -35,6 +48,7 @@ function _App(props: AppProps): JSX.Element {
 
   const handleTodoFetch = () => {
     props.fetchTodos();
+    setFetching(true);
   };
 
   const onTodoClick = (id: number): void => {
@@ -58,7 +72,7 @@ function _App(props: AppProps): JSX.Element {
       <button onClick={(): void => handleClick(-1)}>Decrease -</button> */}
 
       <button onClick={handleTodoFetch}>Fetch</button>
-      {renderList()}
+      {fetching ? <h1>Loading</h1> : renderList()}
     </>
   );
 }
